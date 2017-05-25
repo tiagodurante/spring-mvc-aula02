@@ -1,16 +1,16 @@
 <%-- 
-    Document   : PainelDoCliente
-    Created on : 20/05/2017, 14:30:14
-    Author     : Faculdade Alfa
+    Document   : DetalhesDaConta
+    Created on : 24/05/2017, 13:58:58
+    Author     : tiago
 --%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <title>Painel</title>
+        <title>Detalhes da conta</title>
     </head>
     <body>
         <ol class="breadcrumb">
@@ -22,6 +22,18 @@
             <li role="presentation" class="active"><a>Contas</a></li>
         </ul>
         <br>
+        <section class="container-fluid col-lg-8 col-lg-offset-2">
+            <div class="page-header">
+                <h3>Detalhes da conta <small>${conta.getAgencia()} / ${conta.getNumero()}</small>
+                    <span class="pull-right"><div class="btn-group" role="group" aria-label="...">
+                            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Depósito</button>
+                            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Saque</button>
+                        </div></span></h3>
+            </div>
+            <ol class="breadcrumb">
+                <li>Saldo atual: ${conta.getSaldo()}</li>
+            </ol>
+        </section>
         <section class="container-fluid col-lg-8 col-lg-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">

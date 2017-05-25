@@ -16,7 +16,7 @@
     <body class="container-fluid">
         <div class="page-header">
             <h1>Clientes cadastrados
-                <span class="pull-right"><button class="btn btn-primary" onclick="window.location.href='novoCadastroDeCliente'">Novo</button></span>
+                <span class="pull-right"><button class="btn btn-primary" onclick="window.location.href = 'novoCadastroDeCliente'">Novo</button></span>
             </h1>      
         </div>        
         <c:if test="${not empty clientesCadastrados}">
@@ -31,7 +31,7 @@
                     <tr>
                         <td>${cliente.getId()}</td>
                         <td>${cliente.getNome()}</td>
-                        <td><button type="button" class="btn btn-primary btn-xs" onclick="window.location.href='selecionarCliente?id=${i.index}'">Selecionar</button><button type="button" class="btn btn-danger btn-xs" onclick="window.location.href='excluirCliente?id=${i.index}'">Excluir</button></td>
+                        <td><button type="button" class="btn btn-primary btn-xs" onclick="window.location.href = 'selecionarCliente?id=${i.index}'">Selecionar</button><button type="button" class="btn btn-danger btn-xs" onclick="window.location.href = 'excluirCliente?id=${i.index}'">Excluir</button></td>
                     </tr>
                 </c:forEach>
             </tbody>
