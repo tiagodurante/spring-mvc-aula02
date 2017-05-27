@@ -30,6 +30,10 @@ public class Cliente {
 
     public Cliente() {
     }
+    
+    public Cliente(String nome) {
+        this.nome = nome;
+    }
 
     public Long getId() {
         return id;

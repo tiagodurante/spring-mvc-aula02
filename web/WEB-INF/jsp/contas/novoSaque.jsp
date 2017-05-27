@@ -15,20 +15,16 @@
     <body>
         <ol class="breadcrumb">
             <li>Olá, ${cliente.nome}</li>
-            <li class="pull-right"><a href="#">Sair</a></li>
+            <li class="pull-right"><a href="sairDaConta">Sair</a></li>
         </ol>
         <ul class="nav nav-tabs">
             <li role="presentation"><a href="painelDoCliente">Histórico de operações</a></li>
-            <li role="presentation" class="active"><a>Contas</a></li>
+            <li role="presentation" class="active"><a href="painesDeContas">Contas</a></li>
         </ul>
         <br>
         <section class="container-fluid col-lg-8 col-lg-offset-2">
             <div class="page-header">
-                <h3>Detalhes da conta <small>${conta.getAgencia()} / ${conta.getNumero()}</small>
-                    <span class="pull-right"><div class="btn-group" role="group" aria-label="...">
-                            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Depósito</button>
-                            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Saque</button>
-                        </div></span></h3>
+                <h3>Detalhes da conta <small>${conta.getAgencia()} / ${conta.getNumero()}</small></h3>
             </div>
             <ol class="breadcrumb">
                 <li>Saldo atual: ${conta.getSaldo()}</li>

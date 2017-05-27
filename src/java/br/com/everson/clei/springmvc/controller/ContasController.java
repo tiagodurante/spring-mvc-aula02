@@ -10,6 +10,8 @@ import br.com.tiago.amado.springmvc.model.Conta;
 import br.com.tiago.amado.springmvc.model.Operacao;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,6 +48,21 @@ public class ContasController {
         m.addAttribute("cliente", cliente);
         m.addAttribute("contasEncontradas", contasEncontradas);
         return "contas/PainelDeContas";
+    }
+
+    @RequestMapping("/PainelDoClienteComOperacoes")
+    public String painelComOperacoesDoCliente(HttpSession hs, Model m) {
+        Cliente cliente = (Cliente) hs.getAttribute("clienteAtual");
+
+        List<Operacao> operacoesEncontradas = new ArrayList<>();
+        operacoes.stream().filter((op) -> (op.getConta().getCliente().getId().equals(cliente.getId()))).forEach((op) -> {
+            operacoesEncontradas.add(op);
+        });
+
+        Collections.reverse(operacoesEncontradas);
+        m.addAttribute("cliente", cliente);
+        m.addAttribute("operacoesEncontradas", operacoesEncontradas);
+        return "clientes/PainelDoCliente";
     }
 
     @RequestMapping("novaConta")
@@ -153,5 +170,38 @@ public class ContasController {
         o.setSaldoAtual(conta.getSaldo());
         operacoes.add(o);
         return "redirect:selecionarContaJaNaSession";
+    }
+
+    @RequestMapping("sairDaConta")
+    public String sair(HttpServletRequest hsr, HttpSession hs, Model m, Operacao o) {
+        hs.invalidate();
+        return "redirect:inicio";
+    }
+
+    @RequestMapping("depositoSemConta")
+    public String novoDepositoSemConta(HttpServletRequest hsr, HttpSession hs, Model m, Operacao o) {
+        m.addAttribute("contas", contas);
+        return "contas/DepositoSemContaLogada";
+    }
+
+    @RequestMapping("/salvarDepositoSemContaLogada")
+    public String depositarSemConta(HttpServletRequest hsr, HttpSession hs, Model m, Operacao o) {
+        Conta conta = (Conta) contas.get(Integer.parseInt(hsr.getParameter("contaSelecionada")));
+
+        for (Conta op : contas) {
+            if (conta.getId().equals(op.getId())) {
+                o.setSaldoAnterior(op.getSaldo());
+                op.setSaldo(String.valueOf(Integer.parseInt(op.getSaldo()) + Integer.parseInt(o.getValor())));
+                o.setSaldoAtual(op.getSaldo());
+            }
+        }
+
+        o.setConta(conta);
+        o.setIdentificador(new Cliente("Sem Identificação"));
+        o.setId(Math.round(Math.random() * 10000));
+        o.setTipo("Depósito não identificado");
+        System.out.println(o.getId());
+        operacoes.add(o);
+        return "mensagens/DepositoSemContaLogadaRealizado";
     }
 }

@@ -15,11 +15,11 @@
     <body>
         <ol class="breadcrumb">
             <li>Olá, ${cliente.nome}</li>
-            <li class="pull-right"><a href="#">Sair</a></li>
+            <li class="pull-right"><a href="sairDaConta">Sair</a></li>
         </ol>
         <ul class="nav nav-tabs">
             <li role="presentation"><a href="painelDoCliente">Histórico de operações</a></li>
-            <li role="presentation" class="active"><a>Contas</a></li>
+            <li role="presentation" class="active"><a href="painesDeContas">Contas</a></li>
         </ul>
         <br>
         <section class="container-fluid col-lg-8 col-lg-offset-2">

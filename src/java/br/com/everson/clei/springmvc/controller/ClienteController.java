@@ -62,8 +62,7 @@ public class ClienteController {
     
     @RequestMapping("/painelDoCliente ")
     public String importarClienteNoSession(HttpSession hs, Cliente c, Model m) {
-        m.addAttribute(hs.getAttribute("clienteAtual"));
-        return "clientes/PainelDoCliente";
+        return "redirect:PainelDoClienteComOperacoes";
     }
 
 //    @RequestMapping("/persistePessoa")
