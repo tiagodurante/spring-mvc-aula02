@@ -5,13 +5,24 @@
  */
 package br.com.tiago.amado.springmvc.model;
 
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 /**
  *
  * @author Faculdade Alfa
  */
-public class Conta {
+@Entity
+public class Conta implements Serializable{
+    @Id
     private Long id;
     private String agencia;
+    
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Cliente cliente;
     private String numero;
     private String saldo;

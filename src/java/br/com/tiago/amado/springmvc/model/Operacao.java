@@ -5,17 +5,28 @@
  */
 package br.com.tiago.amado.springmvc.model;
 
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 /**
  *
  * @author tiago
  */
-public class Operacao {
+@Entity
+public class Operacao implements Serializable{
+    @Id
     private Long id;
     private String tipo;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Conta conta;
     private String saldoAnterior;
     private String valor;
     private String saldoAtual;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Cliente identificador;
 
     public Operacao() {

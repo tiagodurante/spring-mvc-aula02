@@ -5,12 +5,18 @@
  */
 package br.com.tiago.amado.springmvc.model;
 
+import java.io.Serializable;
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Faculdade Alfa
  */
-public class Cliente {
-    
+@Entity
+public class Cliente implements Serializable{
+    @Id
     private Long id;
     private String nome;
     private String sobrenome;
@@ -27,7 +33,7 @@ public class Cliente {
     private String estado;
     private String cidade;
     private String cep;
-
+    
     public Cliente() {
     }
     

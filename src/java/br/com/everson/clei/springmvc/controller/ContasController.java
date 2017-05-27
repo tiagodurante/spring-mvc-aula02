@@ -5,6 +5,8 @@
  */
 package br.com.everson.clei.springmvc.controller;
 
+import br.com.tiago.amado.springmvc.dao.DAO;
+import static br.com.tiago.amado.springmvc.dao.DAO.getSession;
 import br.com.tiago.amado.springmvc.model.Cliente;
 import br.com.tiago.amado.springmvc.model.Conta;
 import br.com.tiago.amado.springmvc.model.Operacao;
@@ -16,6 +18,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernate.HibernateException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author Faculdade Alfa
  */
 @Controller
-public class ContasController {
+public class ContasController extends DAO{
 
     private List<Conta> contas;
     private List<Operacao> operacoes;
@@ -79,6 +82,14 @@ public class ContasController {
         c.setId(Math.round(Math.random() * 10000));
         c.setCliente(cliente);
         c.setSaldo("0");
+        try {
+            begin();
+            getSession().save(c);
+            commit();
+        } catch (HibernateException e) {
+            rollback();
+            e.printStackTrace();
+        }
         contas.add(c);
         return "redirect:painesDeContas";
     }
@@ -149,6 +160,14 @@ public class ContasController {
             aux.setSaldo(conta.getSaldo());
         });
         o.setSaldoAtual(conta.getSaldo());
+        try {
+            begin();
+            getSession().save(o);
+            commit();
+        } catch (HibernateException e) {
+            rollback();
+            e.printStackTrace();
+        }
         operacoes.add(o);
         return "redirect:selecionarContaJaNaSession";
     }
@@ -168,6 +187,14 @@ public class ContasController {
             aux.setSaldo(conta.getSaldo());
         });
         o.setSaldoAtual(conta.getSaldo());
+        try {
+            begin();
+            getSession().save(o);
+            commit();
+        } catch (HibernateException e) {
+            rollback();
+            e.printStackTrace();
+        }
         operacoes.add(o);
         return "redirect:selecionarContaJaNaSession";
     }
@@ -200,7 +227,14 @@ public class ContasController {
         o.setIdentificador(new Cliente("Sem Identificação"));
         o.setId(Math.round(Math.random() * 10000));
         o.setTipo("Depósito não identificado");
-        System.out.println(o.getId());
+        try {
+            begin();
+            getSession().save(o);
+            commit();
+        } catch (HibernateException e) {
+            rollback();
+            e.printStackTrace();
+        }
         operacoes.add(o);
         return "mensagens/DepositoSemContaLogadaRealizado";
     }
